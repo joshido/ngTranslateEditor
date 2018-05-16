@@ -3,7 +3,6 @@
     <div class="form-group">
       <h4 for="exampleInputFile">1 - Source file</h4>
       <input type="file" onchange="angular.element(this).scope().readFile(this.files, 'source')">
-      <p class="help-block">e.g en.json</p>
     </div>
   </div>
 
@@ -11,29 +10,29 @@
     <div class="form-group">
       <h4 for="exampleInputFile">2 - Destination file</h4>
       <input type="file" onchange="angular.element(this).scope().readFile(this.files, 'dest')">
-      <p class="help-block">e.g fr.json</p>
     </div>
   </div>
 </div>
 
 <h4>3 - Edit the translation</h4>
+<div class="form-group">
+  <input type="text" ng-model="keyFilter" class="form-control" placeholder="Key Filter"/>
+</div>
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th class="col-md-1">#</th>
-      <th class="col-md-3">Keys({{data.finalJson.length}})</th>
-      <th class="col-md-4">EN</th>
-      <th class="col-md-4">Translation</th>
+      <th class="col-md-2">Keys({{data.finalJson.length}})</th>
+      <th class="col-md-3">From</th>
+      <th class="col-md-6">Translation</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="item in data.finalJson">
-      <td>{{$index + 1}}</td>
+    <tr ng-repeat="item in data.finalJson | filter:keyFilter">
       <td class="text-muted">{{item.key}}</td>
       <td><b>{{item.en}}</b></td>
       <td>
         <div class="form-group" ng-class="{'has-error': !item.translate}">
-          <input type="text" class="form-control" ng-model="item.translate" required>
+          <textarea class="form-control" ng-model="item.translate"></textarea>
         </div>
       </td>
     </tr>
