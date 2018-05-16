@@ -36,7 +36,7 @@ angular.module('translatorApp')
       angular.forEach(s, function (value, key) {
         result.push({
           key: key,
-          en: value,
+          from: value,
           translate: (angular.isUndefined(d[key]) ? '' : d[key])
         });
       });

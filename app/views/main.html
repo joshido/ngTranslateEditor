@@ -29,10 +29,10 @@
   <tbody>
     <tr ng-repeat="item in data.finalJson | filter:keyFilter">
       <td class="text-muted">{{item.key}}</td>
-      <td><b>{{item.en}}</b></td>
+      <td><b>{{item.from}}</b></td>
       <td>
         <div class="form-group" ng-class="{'has-error': !item.translate}">
-          <textarea class="form-control" ng-model="item.translate"></textarea>
+          <textarea class="form-control" ng-model="item.translate" rows="5"></textarea>
         </div>
       </td>
     </tr>
