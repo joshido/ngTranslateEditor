@@ -92,7 +92,7 @@ angular.module('translatorApp')
       source: {},
       dest: {}
     };
-    $scope.data.finalJson = {};
+    $scope.data.finalJson = [];
     $scope.data.files = {
       source: '',
       dest: ''
