@@ -11,7 +11,7 @@ dest file. If there is any KEYs insufficent, leave it blank for the editor to su
 
  */
 angular.module('translatorApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope) {
     var _path = [];
 
     //called with every property and it's value
@@ -49,8 +49,9 @@ angular.module('translatorApp')
       var lastKeyIndex = keyPath.length - 1;
       for (var i = 0; i < lastKeyIndex; ++i) {
         var key = keyPath[i];
-        if (!(key in obj))
+        if (!(key in obj)) {
           obj[key] = {};
+        }
         obj = obj[key];
       }
       obj[keyPath[lastKeyIndex]] = value;
@@ -60,20 +61,13 @@ angular.module('translatorApp')
       for (var i in o) {
         callback.apply(this, [i, o[i], target]);
 
-        if (o[i] !== null && typeof (o[i]) == 'object') {
+        if (o[i] !== null && typeof (o[i]) === 'object') {
           _path.push(i);
           //going on step down in the object tree!!
           _traverse(o[i], callback, target);
           _path.splice(_path.length - 1, 1);
         }
       }
-    };
-
-    var _deep_value = function (obj, _path) {
-      for (var i = 0, _path = _path.split('.'), len = _path.length; i < len; i++) {
-        obj = obj[_path[i]];
-      }
-      return obj;
     };
 
     var _convertToJsonData = function (items) {
@@ -132,7 +126,7 @@ angular.module('translatorApp')
       var str = _convertToJsonData($scope.data.finalJson);
 
       var uri = 'data:application/json;charset=utf-8,' + encodeURIComponent(str);
-      var downloadLink = document.createElement("a");
+      var downloadLink = document.createElement('a');
       downloadLink.href = uri;
       downloadLink.download = $scope.data.files.dest;
 
